@@ -3,63 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name | Portfolio</title>
+  <title>Your Name | AI/ML Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header>
-    <nav>
-      <h2 class="logo">YourName</h2>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="hero">
+  <!-- Navigation -->
+  <nav>
+    <h2 class="logo">YourName</h2>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
       <h1>Hi, I’m <span>Your Name</span></h1>
-      <p>Aspiring Machine Learning Engineer | Problem Solver</p>
-      <a href="#projects" class="btn">View My Work</a>
+      <p>AI & Machine Learning Developer | Deep Learning | NLP | Computer Vision</p>
+      <div class="hero-links">
+        <a href="resume.pdf" class="btn" target="_blank">Download Resume</a>
+        <a href="#projects" class="btn-outline">View Projects</a>
+      </div>
     </div>
   </header>
 
-  <!-- About Section -->
+  <!-- About -->
   <section id="about">
     <h2>About Me</h2>
     <p>
-      Brief intro about you: background, skills, passions, and what you’re looking for.
+      Brief intro about you: background, areas of expertise (ML/DL/NLP/CV), and your goals.
+      Example: "I am a Machine Learning Engineer with experience in building predictive models,
+      deploying deep learning systems, and solving real-world AI problems."
     </p>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">Python</div>
+      <div class="skill-card">TensorFlow</div>
+      <div class="skill-card">PyTorch</div>
+      <div class="skill-card">Scikit-learn</div>
+      <div class="skill-card">NLP</div>
+      <div class="skill-card">Computer Vision</div>
+      <div class="skill-card">Pandas / NumPy</div>
+      <div class="skill-card">Matplotlib / Seaborn</div>
+      <div class="skill-card">Docker</div>
+      <div class="skill-card">AWS / GCP</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
   <section id="projects">
     <h2>Projects</h2>
     <div class="projects-grid">
       <div class="card">
         <img src="images/project1.png" alt="Project 1">
-        <h3>Project Title 1</h3>
-        <p>Short description of the project. Tools/tech used.</p>
+        <h3>Image Classification with CNNs</h3>
+        <p>Built a deep learning model using TensorFlow to classify images across 10 categories.</p>
         <a href="https://github.com/your-username/project1" target="_blank">View Code</a>
       </div>
 
       <div class="card">
         <img src="images/project2.png" alt="Project 2">
-        <h3>Project Title 2</h3>
-        <p>Short description of the project. Tools/tech used.</p>
+        <h3>Chatbot with NLP</h3>
+        <p>Developed a chatbot using Python and Transformers (Hugging Face) for customer support.</p>
         <a href="https://github.com/your-username/project2" target="_blank">View Code</a>
+      </div>
+
+      <div class="card">
+        <img src="images/project3.png" alt="Project 3">
+        <h3>Stock Price Prediction</h3>
+        <p>Implemented an LSTM-based model to predict stock price trends using historical data.</p>
+        <a href="https://github.com/your-username/project3" target="_blank">View Code</a>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:yourname@email.com">yourname@email.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/your-profile" target="_blank">Your Profile</a></p>
+  <!-- Experience -->
+  <section id="experience">
+    <h2>Experience & Achievements</h2>
+    <ul>
+      <li><b>AI Intern</b> at XYZ Company (2024) – Worked on NLP pipeline for sentiment analysis.</li>
+      <li>Top 5% in Kaggle Competition: House Prices Prediction.</li>
+      <li>Certified TensorFlow Developer (Google, 2024).</li>
+    </ul>
   </section>
 
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:yourname@email.com">yourname@email.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/your-profile" target="_blank">Your Profile</a></p>
+    <p>GitHub: <a href="https://github.com/your-username" target="_blank">@your-username</a></p>
+    <p>Kaggle: <a href="https://kaggle.com/your-profile" target="_blank">your-profile</a></p>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <p>© 2025 Your Name. Built with ❤️ using GitHub Pages.</p>
   </footer>
