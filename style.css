@@ -1,82 +1,90 @@
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Calibri", "Segoe UI", Arial, sans-serif;
   background: #fff;
-  color: #333;
+  color: #222;
 }
 
-.container {
+.resume {
   display: flex;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: auto;
-  padding: 20px;
 }
 
-/* Sidebar (left column) */
-.sidebar {
+/* LEFT COLUMN */
+.left-column {
   width: 30%;
-  padding: 20px;
-  background: #fff;
+  padding: 30px 20px;
   border-right: 1px solid #ddd;
 }
 
-.sidebar h1 {
+.left-column h1 {
   margin: 0;
   font-size: 2rem;
+  font-weight: bold;
   color: #000;
 }
 
-.sidebar h3 {
+.left-column h3 {
   margin-top: 5px;
   font-weight: normal;
-  color: #555;
+  color: #444;
 }
 
-.sidebar h2 {
-  font-size: 1rem;
-  color: #1a73e8; /* blue headings */
+.left-column .contact {
+  margin: 15px 0 25px 0;
+  font-size: 0.9rem;
+}
+
+.left-column h2 {
+  font-size: 0.95rem;
+  color: #1a73e8; /* Blue like your PDF */
   margin-top: 20px;
   margin-bottom: 8px;
   text-transform: uppercase;
 }
 
-.sidebar ul {
+.left-column ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
+  font-size: 0.9rem;
 }
 
-.sidebar ul li {
+.left-column ul li {
   margin-bottom: 6px;
 }
 
-/* Right column */
-.content {
+/* RIGHT COLUMN */
+.right-column {
   width: 70%;
-  padding: 20px 40px;
+  padding: 30px;
 }
 
-.content h2 {
-  font-size: 1.1rem;
-  color: #1a73e8; /* blue section titles */
+.right-column h2 {
+  font-size: 0.95rem;
+  color: #1a73e8;
   text-transform: uppercase;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 3px;
+  margin-bottom: 12px;
 }
 
-.content h3 {
-  margin-top: 10px;
-  margin-bottom: 5px;
+.right-column h3 {
   font-size: 1rem;
+  font-weight: bold;
+  margin: 8px 0 4px 0;
   color: #000;
 }
 
-.content p, .content ul li {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #444;
+.right-column .date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 8px;
 }
 
-.content ul {
-  padding-left: 20px;
+.right-column p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }
