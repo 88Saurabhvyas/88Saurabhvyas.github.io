@@ -1,103 +1,1997 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saurabh Vyas | Machine Learning Engineer</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Saurabh Vyas · Machine Learning Engineer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --void: #03050f;
+      --deep: #060a1c;
+      --panel: rgba(10, 16, 40, 0.72);
+      --glass: rgba(255, 255, 255, 0.038);
+      --gb: rgba(255, 255, 255, 0.065);
+      --teal: #2dd4bf;
+      --teal-g: rgba(45, 212, 191, 0.18);
+      --violet: #a78bfa;
+      --rose: #fb7185;
+      --amber: #fbbf24;
+      --emerald: #34d399;
+      --text: #e2eaf8;
+      --sub: #7a90b5;
+      --dim: #3d4f6e;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(255, 255, 255, 0.12);
+      --hf: 'Cormorant Garamond', serif;
+      --sf: 'Outfit', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: var(--sf);
+      font-size: 15.5px;
+      line-height: 1.78;
+      overflow-x: hidden;
+    }
+
+    /* ── COSMOS ── */
+    .cosmos {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 55% at 8% 12%, rgba(124, 58, 237, 0.11) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 88% 18%, rgba(45, 212, 191, 0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 45% 82%, rgba(251, 113, 133, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 35% at 75% 70%, rgba(167, 139, 250, 0.07) 0%, transparent 50%),
+        var(--void);
+      animation: cosmos-breathe 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes cosmos-breathe {
+      0% {
+        filter: hue-rotate(0deg) brightness(1);
+      }
+
+      100% {
+        filter: hue-rotate(18deg) brightness(1.04);
+      }
+    }
+
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    #starfield span {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: star-twinkle var(--d, 4s) ease-in-out infinite;
+      animation-delay: var(--dl, 0s);
+    }
+
+    @keyframes star-twinkle {
+
+      0%,
+      100% {
+        opacity: var(--oa, .15);
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: var(--ob, .8);
+        transform: scale(1.4);
+      }
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(45, 212, 191, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45, 212, 191, 0.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      backdrop-filter: blur(24px) saturate(160%);
+      background: rgba(3, 5, 15, 0.75);
+      border-bottom: 1px solid var(--border);
+      padding: 0 72px;
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      height: 62px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-family: var(--hf);
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.3px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 10px var(--teal);
+      animation: dot-live 2s ease-in-out infinite;
+    }
+
+    @keyframes dot-live {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.5);
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-family: var(--sf);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--sub);
+      text-decoration: none;
+      letter-spacing: .4px;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 100px 72px 88px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      font-family: var(--sf);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-tag-line {
+      width: 36px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    h1 {
+      font-family: var(--hf);
+      font-weight: 700;
+      font-size: clamp(56px, 6.5vw, 86px);
+      line-height: 0.96;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    h1 .name-last {
+      background: linear-gradient(130deg, var(--teal) 0%, var(--violet) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+    }
+
+    .hero-role {
+      font-family: var(--sf);
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--sub);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 22px 0 28px;
+    }
+
+    .hero-bio {
+      font-family: var(--hf);
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(226, 234, 248, 0.72);
+      line-height: 1.9;
+      max-width: 440px;
+      font-style: italic;
+    }
+
+    .hero-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .contact-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sf);
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 100px;
+      background: var(--panel);
+      border: 1px solid var(--border2);
+      color: var(--sub);
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      transition: all .25s;
+    }
+
+    .contact-pill:hover {
+      color: var(--teal);
+      border-color: rgba(45, 212, 191, .35);
+    }
+
+    .cpill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* Orbital visual */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 380px;
+    }
+
+    .orb-shell {
+      position: relative;
+      width: 260px;
+      height: 260px;
+    }
+
+    .orb-main {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%,
+          rgba(45, 212, 191, .35) 0%,
+          rgba(124, 58, 237, .45) 45%,
+          rgba(3, 5, 15, .95) 72%);
+      box-shadow: 0 0 70px rgba(45, 212, 191, .18), 0 0 130px rgba(124, 58, 237, .12),
+        inset 0 0 50px rgba(0, 0, 0, .5);
+      animation: orb-breathe 7s ease-in-out infinite;
+    }
+
+    @keyframes orb-breathe {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.035);
+      }
+    }
+
+    .orb-crust {
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--teal), var(--violet), var(--rose), var(--teal));
+      mask: radial-gradient(circle, transparent 97%, black 100%);
+      -webkit-mask: radial-gradient(circle, transparent 97%, black 100%);
+      animation: orb-spin 9s linear infinite;
+      opacity: .55;
+    }
+
+    @keyframes orb-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .orb-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 1px solid;
+      border-radius: 50%;
+    }
+
+    .or1 {
+      width: 340px;
+      height: 340px;
+      margin: -170px 0 0 -170px;
+      border-color: rgba(45, 212, 191, .14);
+      animation: ring-spin 14s linear infinite;
+    }
+
+    .or2 {
+      width: 420px;
+      height: 420px;
+      margin: -210px 0 0 -210px;
+      border-color: rgba(167, 139, 250, .1);
+      animation: ring-spin 22s linear infinite reverse;
+    }
+
+    .or3 {
+      width: 500px;
+      height: 500px;
+      margin: -250px 0 0 -250px;
+      border-color: rgba(45, 212, 191, .06);
+      animation: ring-spin 34s linear infinite;
+    }
+
+    @keyframes ring-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .orb-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 12px var(--teal);
+      animation: dot-live 3s ease-in-out infinite;
+    }
+
+    .od1 {
+      width: 9px;
+      height: 9px;
+      top: 9%;
+      right: 18%;
+      animation-delay: .3s;
+    }
+
+    .od2 {
+      width: 7px;
+      height: 7px;
+      bottom: 14%;
+      left: 10%;
+      background: var(--violet);
+      box-shadow: 0 0 10px var(--violet);
+      animation-delay: 1.2s;
+    }
+
+    .od3 {
+      width: 6px;
+      height: 6px;
+      bottom: 22%;
+      right: 12%;
+      background: var(--amber);
+      box-shadow: 0 0 8px var(--amber);
+      animation-delay: 2.1s;
+    }
+
+    .orb-label {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--sf);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .6;
+      white-space: nowrap;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 72px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      margin-bottom: 80px;
+    }
+
+    .sec-hd {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 38px;
+    }
+
+    .sec-badge {
+      font-family: var(--sf);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 2px;
+      padding: 5px 13px;
+      border-radius: 100px;
+      background: rgba(45, 212, 191, .1);
+      border: 1px solid rgba(45, 212, 191, .22);
+      flex-shrink: 0;
+    }
+
+    h2.sec-title {
+      font-family: var(--hf);
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.5px;
+    }
+
+    .sec-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border2), transparent);
+    }
+
+    /* ── GLASS BASE ── */
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(20px) saturate(130%);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .06);
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+
+    .glass:hover {
+      border-color: rgba(45, 212, 191, .2);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, .35), 0 0 40px rgba(45, 212, 191, .05),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+    }
+
+    /* ── SKILLS ── */
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .sk-card {
+      padding: 24px 26px;
+    }
+
+    .sk-top-bar {
+      height: 2px;
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+
+    .skb-t {
+      background: linear-gradient(to right, var(--teal), transparent);
+    }
+
+    .skb-v {
+      background: linear-gradient(to right, var(--violet), transparent);
+    }
+
+    .skb-a {
+      background: linear-gradient(to right, var(--amber), transparent);
+    }
+
+    .sk-label {
+      font-family: var(--sf);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .sk-label.t {
+      color: var(--teal);
+    }
+
+    .sk-label.v {
+      color: var(--violet);
+    }
+
+    .sk-label.a {
+      color: var(--amber);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-family: var(--sf);
+      font-size: 12px;
+      font-weight: 400;
+      padding: 5px 14px;
+      border-radius: 100px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      color: var(--sub);
+      cursor: default;
+      transition: all .2s;
+    }
+
+    .tag:hover {
+      border-color: rgba(45, 212, 191, .3);
+      color: var(--teal);
+      background: rgba(45, 212, 191, .05);
+    }
+
+    .tag.ht {
+      color: var(--teal);
+      border-color: rgba(45, 212, 191, .28);
+      background: rgba(45, 212, 191, .08);
+    }
+
+    .tag.hv {
+      color: var(--violet);
+      border-color: rgba(167, 139, 250, .28);
+      background: rgba(167, 139, 250, .07);
+    }
+
+    .tag.ha {
+      color: var(--amber);
+      border-color: rgba(251, 191, 36, .25);
+      background: rgba(251, 191, 36, .07);
+    }
+
+    /* ── EXP CARDS ── */
+    .exp-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .xcard {
+      padding: 36px 40px;
+    }
+
+    .xcard-top-bar {
+      height: 3px;
+      margin: -36px -40px 32px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .xb-med {
+      background: linear-gradient(90deg, var(--rose), var(--violet), var(--teal));
+    }
+
+    .xb-agri {
+      background: linear-gradient(90deg, var(--emerald), var(--teal), var(--amber));
+    }
+
+    .xb-isro {
+      background: linear-gradient(90deg, var(--amber), var(--emerald));
+    }
+
+    .xcard-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .xcard-co {
+      font-family: var(--hf);
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.2px;
+    }
+
+    .xcard-role {
+      font-family: var(--sf);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    .xr-med {
+      color: var(--rose);
+    }
+
+    .xr-agri {
+      color: var(--emerald);
+    }
+
+    .xr-isro {
+      color: var(--amber);
+    }
+
+    .period-tag {
+      font-family: var(--sf);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 100px;
+      background: var(--glass);
+      border: 1px solid var(--border2);
+      color: var(--sub);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0 24px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 20px;
+      text-align: center;
+      min-width: 110px;
+    }
+
+    .sv {
+      display: block;
+      font-family: var(--hf);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .sv.t {
+      color: var(--teal);
+      text-shadow: 0 0 16px rgba(45, 212, 191, .4);
+    }
+
+    .sv.r {
+      color: var(--rose);
+      text-shadow: 0 0 16px rgba(251, 113, 133, .4);
+    }
+
+    .sv.a {
+      color: var(--amber);
+      text-shadow: 0 0 16px rgba(251, 191, 36, .35);
+    }
+
+    .sl {
+      display: block;
+      font-family: var(--sf);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .sol-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .sol-tag {
+      font-family: var(--sf);
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 100px;
+      background: rgba(52, 211, 153, .07);
+      border: 1px solid rgba(52, 211, 153, .2);
+      color: var(--emerald);
+    }
+
+    ul.xl {
+      list-style: none;
+    }
+
+    ul.xl li {
+      font-family: var(--sf);
+      font-size: 15px;
+      line-height: 1.75;
+      padding: 9px 0 9px 24px;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      color: rgba(226, 234, 248, .75);
+    }
+
+    ul.xl li:last-child {
+      border: none;
+    }
+
+    ul.xl li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 17px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px rgba(45, 212, 191, .5);
+    }
+
+    .xcard.med ul.xl li::before {
+      background: var(--rose);
+      box-shadow: 0 0 8px rgba(251, 113, 133, .4);
+    }
+
+    .xcard.isro ul.xl li::before {
+      background: var(--amber);
+      box-shadow: 0 0 8px rgba(251, 191, 36, .4);
+    }
+
+    ul.xl strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      font-family: var(--sf);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--amber);
+      background: rgba(251, 191, 36, .07);
+      border: 1px solid rgba(251, 191, 36, .22);
+      padding: 9px 18px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all .2s;
+    }
+
+    .pub-link:hover {
+      background: rgba(251, 191, 36, .13);
+      border-color: rgba(251, 191, 36, .4);
+    }
+    .earth-module {
+      position:relative; width:100%; height:220px;
+      background:rgba(251,191,36,.02); border:1px solid rgba(251,191,36,.1);
+      border-radius:12px; margin:18px 0 24px; overflow:hidden;
+    }
+    .earth-label {
+      position:absolute; top:12px; left:16px;
+      font-family:var(--sf); font-size:10px; font-weight:600;
+      color:rgba(251,191,36,.5); letter-spacing:2.5px; text-transform:uppercase; z-index:2;
+    }
+    #ecanvas { width:100%; height:100%; display:block; }
+    /* ── HEART MODULE ── */
+    .heart-module {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: rgba(251, 113, 133, .03);
+      border: 1px solid rgba(251, 113, 133, .12);
+      border-radius: 12px;
+      margin: 18px 0 24px;
+      overflow: hidden;
+    }
+
+    .heart-label {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-family: var(--sf);
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(251, 113, 133, .5);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    #hcanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .ecg-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 36px;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ecg-inner {
+      width: 200%;
+      height: 100%;
+      animation: ecg-scroll 2.2s linear infinite;
+    }
+    
+    .agri-module {
+      position:relative; width:100%; height:210px;
+      background:rgba(52,211,153,.03); border:1px solid rgba(52,211,153,.12);
+      border-radius:12px; margin:18px 0 24px; overflow:hidden;
+    }
+    
+    .agri-label {
+      position:absolute; top:12px; left:16px;
+      font-family:var(--sf); font-size:10px; font-weight:600;
+      color:rgba(52,211,153,.5); letter-spacing:2.5px; text-transform:uppercase; z-index:2;
+    }
+    
+    #acanvas { width:100%; height:100%; display:block; }
+    
+    @keyframes ecg-scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .edu-card {
+      padding: 26px 28px;
+    }
+
+    .edu-deg {
+      font-family: var(--hf);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .edu-school {
+      font-family: var(--sf);
+      font-size: 11.5px;
+      color: var(--dim);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .edu-score {
+      font-family: var(--hf);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--teal);
+      text-shadow: 0 0 20px rgba(45, 212, 191, .35);
+    }
+
+    .edu-note {
+      font-family: var(--sf);
+      font-size: 12px;
+      color: var(--dim);
+      margin-top: 5px;
+    }
+
+    /* ── LANGUAGES ── */
+    .lang-wrap {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lang {
+      font-family: var(--sf);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 22px;
+      border-radius: 100px;
+      background: var(--panel);
+      border: 1px solid var(--border2);
+      color: var(--sub);
+      transition: all .2s;
+      cursor: default;
+    }
+
+    .lang:hover {
+      color: var(--teal);
+      border-color: rgba(45, 212, 191, .3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 26px 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--sf);
+      font-size: 12px;
+      color: var(--dim);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-glow {
+      color: var(--teal);
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:900px) {
+
+      .hero,
+      .page {
+        padding: 60px 28px;
+      }
+
+      nav {
+        padding: 0 28px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+
+      .hero-visual {
+        height: 300px;
+      }
+
+      .sk-grid,
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .xcard {
+        padding: 28px 24px;
+      }
+
+      .xcard-top-bar {
+        margin: -28px -24px 24px;
+      }
+
+      footer {
+        padding: 20px 28px;
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="resume">
 
-    <!-- LEFT COLUMN -->
-    <aside class="left-column">
-      <h1>Saurabh Vyas</h1>
-      <h3>Machine Learning Engineer</h3>
+  <div class="cosmos"></div>
+  <div id="starfield"></div>
+  <div class="grid-overlay"></div>
 
-      <div class="contact">
-        <p>Ahemdabad, Gujarat</p>
-        <p><b>+91-6354939708</b></p>
-        <p><a href="mailto:vyassaurabh88@gmail.com">vyassaurabh88@gmail.com</a></p>
+  <!-- ══ NAV ══ -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="nav-logo-dot"></div>
+        Saurabh Vyas
       </div>
+      <div class="nav-links">
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="mailto:vyassaurabh88@gmail.com">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-      <h2>Skills</h2>
-      <ul>
-        <li>Python</li>
-        <li>Deep Learning (CNN), Machine Learning</li>
-        <li>Data Analysis</li>
-        <li>TensorFlow</li>
-        <li>Pandas</li>
-        <li>NumPy</li>
-        <li>Scikit learn</li>
-        <li>Flask API</li>
-        <li>Google Earth Engine</li>
-      </ul>
+  <!-- ══ HERO ══ -->
+  <div class="hero reveal" style="transition-delay:.1s">
+    <div>
+      <div class="hero-tag">
+        <div class="hero-tag-line"></div>Machine Learning Engineer
+      </div>
+      <h1>Saurabh<span class="name-last">Vyas</span></h1>
+      <p class="hero-role">Deep Learning · Remote Sensing · Medical AI</p>
+      <p class="hero-bio">Building intelligent systems at the intersection of satellite imagery, precision agriculture,
+        and cardiac signal analysis.</p>
+      <div class="hero-contacts">
+        <a href="mailto:vyassaurabh88@gmail.com" class="contact-pill">
+          <span class="cpill-dot"></span>vyassaurabh88@gmail.com
+        </a>
+        <span class="contact-pill"><span class="cpill-dot"></span>+91 63549 39708</span>
+        <span class="contact-pill"><span class="cpill-dot"></span>Ahmedabad, Gujarat</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="orb-shell">
+        <div class="or3 orb-ring"></div>
+        <div class="or2 orb-ring"></div>
+        <div class="or1 orb-ring"></div>
+        <div class="orb-main"></div>
+        <div class="orb-crust"></div>
+        <div class="orb-dot od1"></div>
+        <div class="orb-dot od2"></div>
+        <div class="orb-dot od3"></div>
+      </div>
+      <div class="orb-label">Neural · Core · Active</div>
+    </div>
+  </div>
 
-      <h2>Languages</h2>
-      <ul>
-        <li>English</li>
-        <li>Hindi</li>
-        <li>Gujarati</li>
-      </ul>
+  <!-- ══ MAIN ══ -->
+  <div class="page">
 
-    </aside>
-
-    <!-- RIGHT COLUMN -->
-    <main class="right-column">
-
-      <section>
-        <h2>Professional Summary</h2>
-        <p>
-          As a Machine Learning Engineer, I specialize in satellite data processing
-          and AI applications in agriculture. My expertise includes developing and
-          optimizing machine learning models, enhancing precision agriculture
-          through GIS integration, and deploying scalable AI solutions. I'm deeply
-          passionate about leveraging technology for sustainable agricultural
-          practices and possess hands-on experience in large-scale data
-          processing
+    <!-- SUMMARY -->
+    <section class="reveal" style="margin-bottom:64px;">
+      <div class="glass" style="padding:30px 38px;border-left:3px solid var(--teal);">
+        <p style="font-family:var(--hf);font-size:19px;font-style:italic;line-height:1.9;color:rgba(226,234,248,.82);">
+          ML Engineer with expertise in CNN, RNN, GRU, Bidirectional GRU, and Temporal Convolutional Networks (TCN).
+          Delivers end-to-end AI pipelines using Flask, MongoDB, PostgreSQL, and Google Earth Engine —
+          from research prototype to scalable production deployment.
         </p>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <h2>Experience</h2>
-        <h3>Kali MedTech Pvt. Ltd. – Machine Learning Engineer</h3>
-        <p class="date">Apr 2025 – present</p>
-        <ul style="list-style-type:square;">
-        <li>Developed and deployed pqrst peak detection deep learning model</li>
-        <li>Developed and deployed Grid detection for medical ecg report images using deep learning model</li>        
-        </ul>
-        
-        <h3>RPA Agriculture Infrastructure & Solution Pvt. Ltd. – Junior Python Developer</h3>
-        <p class="date">July 2023 – Apr 2025 (present: part-time)</p>
-        <ul style="list-style-type:square;">
-        <li>Developed and optimized ML & deep learning models for crop classification using satellite imagery and time-series analysis.</li>
-        <li>Designed and implemented AI-powered pit & plant detection solutions using computer vision techniques.</li>
-        <li>Built models for crop health monitoring and yield forecasting using vegetation indices and remote sensing data.</li>
-        <li>Automated data processing workflows using Python, Flask, PostgreSQL.</li>
-        <li>Integrated GIS data with ML models for precision agriculture, improving geospatial analytics efficiency</li>
-        <li>Built and enhancement of CNN-based Crop classification models by integrating advanced deep learning architectures with satellite time series data.</li>
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="sec-hd reveal">
+        <span class="sec-badge">01 · Skills</span>
+        <h2 class="sec-title">Capabilities</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="sk-grid">
+        <div class="glass sk-card reveal" style="transition-delay:.05s">
+          <div class="sk-top-bar skb-t"></div>
+          <div class="sk-label t">Core Architectures</div>
+          <div class="tags">
+            <span class="tag ht">CNN</span><span class="tag ht">RNN</span>
+            <span class="tag ht">GRU</span><span class="tag ht">Bidirectional GRU</span>
+            <span class="tag ht">TCN</span><span class="tag">Random Forest</span>
+            <span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">Scikit-learn</span>
+          </div>
+        </div>
+        <div class="glass sk-card reveal" style="transition-delay:.1s">
+          <div class="sk-top-bar skb-v"></div>
+          <div class="sk-label v">Frameworks & Backend</div>
+          <div class="tags">
+            <span class="tag hv">Flask API</span><span class="tag hv">MongoDB</span>
+            <span class="tag">PostgreSQL</span><span class="tag">Python</span>
+            <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Data Analysis</span>
+          </div>
+        </div>
+        <div class="glass sk-card reveal" style="transition-delay:.15s">
+          <div class="sk-top-bar skb-a"></div>
+          <div class="sk-label a">Geospatial & Remote Sensing</div>
+          <div class="tags">
+            <span class="tag ha">Google Earth Engine</span>
+            <span class="tag ha">Sentinel-1 SAR</span>
+            <span class="tag ha">NDVI / EVI</span>
+            <span class="tag">GIS Integration</span>
+            <span class="tag">Time-series Analysis</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <h3>Space Applications Centre, ISRO – Research Intern</h3>
-        <p class="date">Jan 2023 – Apr 2023</p>
-        <p><b>Project:</b> Automated Kharif Rice Mapping Using SAR Data & Machine Learning (GEE)</p>
-        <li>
-          Developed Random Forest model on Google Earth Engine for rice mapping using Sentinel-1 SAR data.  
-          Achieved 96.36%–98.59% accuracy. Estimated acreage within 15.85% of reported values.
-        </li>
-        <li>Optimized remote sensing data processing pipelines through Google Earth Engine (GEE) to handle large-scale agricultural datasets efficiently.</li>
-        <li><a href="https://www.researchgate.net/publication/387849714_Automated_kharif_rice_mapping_using_SAR_data_and_machine_learning_techniques_in_GEE_platform">Resulted in a published paper: 'Automated Kharif Rice Mapping Using SAR Data & ML Techniques in GEE' (May 2024)[Current Science. 126. 1265. 10.18520/cs/v126/i10/1265-1272.]</a></li>
-      </section>
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="sec-hd reveal">
+        <span class="sec-badge">02 · Work</span>
+        <h2 class="sec-title">Experience</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="exp-stack">
 
-      <section>
-        <h2>Education</h2>
-        <p><b>B.Tech – Agricultural Information Technology</b>, AAU Anand (2019–2023)  
-        GPA: 8.03/10 | President of Nature’s Club | House Leader</p>
-        <p><b>H.S.C. Science</b>, C.K. Prajapati School, Vadodara (2017–2019) – 65.4%</p>
-        <p><b>S.S.C. (GSEB)</b>, Vidhya Vikas School, Vadodara (2016–2017) – 82%</p>
-      </section>
+        <!-- KALI -->
+        <div class="glass xcard med reveal">
+          <div class="xcard-top-bar xb-med"></div>
+          <div class="xcard-head">
+            <div>
+              <div class="xcard-co">Kali MedTech Pvt. Ltd.</div>
+              <div class="xcard-role xr-med">Machine Learning Engineer</div>
+            </div>
+            <div class="period-tag">Apr 2025 – Present</div>
+          </div>
+          <div class="heart-module">
+            <div class="heart-label">// Cardiac · AI · Live</div>
+            <canvas id="hcanvas"></canvas>
+            <div class="ecg-wrap">
+              <svg class="ecg-inner" viewBox="0 0 800 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="0,18 35,18 55,18 65,4 75,31 85,1 95,33 105,18 145,18
+                        185,18 205,18 215,4 225,31 235,1 245,33 255,18 295,18
+                        335,18 355,18 365,4 375,31 385,1 395,33 405,18 445,18
+                        485,18 505,18 515,4 525,31 535,1 545,33 555,18 595,18
+                        635,18 655,18 665,4 675,31 685,1 695,33 705,18 745,18 800,18" fill="none"
+                  stroke="rgba(251,113,133,.45)" stroke-width="1.5" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat"><span class="sv r">97.8%</span><span class="sl">PQRST Train</span></div>
+            <div class="stat"><span class="sv t">95.3%</span><span class="sl">PQRST Val</span></div>
+            <div class="stat"><span class="sv r">96.5%</span><span class="sl">Grid Train</span></div>
+            <div class="stat"><span class="sv t">94.1%</span><span class="sl">Grid Val</span></div>
+          </div>
+          <ul class="xl">
+            <li>Developed <strong>PQRST peak detection</strong> using a custom architecture combining <strong>GRU and
+                Bidirectional GRU</strong> layers with temporal dependencies — <strong>97.8% train / 95.3%
+                validation</strong> accuracy.</li>
+            <li>Built <strong>ECG grid detection</strong> for medical report images via CNN pipeline — automated
+              digitisation of paper ECG records. <strong>96.5% train / 94.1% val.</strong></li>
+            <li>Integrated <strong>MongoDB</strong> for scalable storage of patient sessions, model predictions, and ECG
+              metadata across multi-device deployments.</li>
+            <li>Engineered a <strong>Flask API auto-learning pipeline</strong> — continuously ingests ECG data, triggers
+              incremental retraining, and auto-redeploys improved models without manual intervention.</li>
+          </ul>
+        </div>
 
-    </main>
+        <!-- RPA -->
+        <div class="glass xcard agri reveal">
+          <div class="xcard-top-bar xb-agri"></div>
+          <div class="xcard-head">
+            <div>
+              <div class="xcard-co">RPA Agriculture Infrastructure & Solutions</div>
+              <div class="xcard-role xr-agri">Junior Python Dev → ML Engineer</div>
+            </div>
+            <div class="period-tag">Jul 2023 – Apr 2025 · Part-time</div>
+          </div>
+          <div class="sol-tags">
+            <span class="sol-tag">🌿 Forest Monitoring</span>
+            <span class="sol-tag">🌾 Crop Intelligence</span>
+            <span class="sol-tag">📡 SAR Analytics</span>
+            <span class="sol-tag">🗓 Phenology Detection</span>
+            <span class="sol-tag">🛰 Precision Agriculture</span>
+          </div>
+          <div class="agri-module">
+            <div class="agri-label">// NDVI · Crop Cycle · Live</div>
+            <canvas id="acanvas"></canvas>
+          </div>
+          <ul class="xl">
+            <li><strong>Forest Monitoring Platform:</strong> AI-powered pit & plant detection scaled into a full forest
+              monitoring solution — canopy density assessment, vegetation change detection, and deforestation alerting
+              at geographic scale.</li>
+            <li><strong>Crop Phenology Engine:</strong> Dedicated <strong>sowing date</strong> and <strong>harvesting
+                date detection</strong> models using multi-temporal satellite imagery for automated field-level crop
+              calendar intelligence.</li>
+            <li><strong>SAR-based NDVI Prediction:</strong> Novel regression model predicting <strong>NDVI from
+                Sentinel-1 SAR data</strong> — enabling continuous vegetation health monitoring through cloud-covered
+              regions.</li>
+            <li>Built and enhanced <strong>CNN + TCN crop classification models</strong> integrating satellite
+              time-series with temporal convolutional architectures for improved seasonal pattern recognition.</li>
+            <li>Engineered <strong>crop health monitoring and yield forecasting</strong> models using NDVI, EVI, and
+              multi-source remote sensing data.</li>
+            <li>Automated data processing workflows with <strong>Python, Flask, and PostgreSQL</strong> for real-time
+              geospatial analytics delivery at scale.</li>
+          </ul>
+        </div>
+
+        <!-- ISRO -->
+        <div class="glass xcard isro reveal">
+          <div class="xcard-top-bar xb-isro"></div>
+          <div class="xcard-head">
+            <div>
+              <div class="xcard-co">Space Applications Centre, ISRO</div>
+              <div class="xcard-role xr-isro">Research Intern</div>
+            </div>
+            <div class="period-tag">Jan 2023 – Apr 2023</div>
+          </div>
+          <div class="earth-module">
+            <div class="earth-label">// SAR · Orbital · Pass</div>
+            <canvas id="ecanvas"></canvas>
+          </div>
+          <div class="stat-row">
+            <div class="stat"><span class="sv a">98.59%</span><span class="sl">Peak Acc.</span></div>
+            <div class="stat"><span class="sv a">96.36%</span><span class="sl">Min Acc.</span></div>
+            <div class="stat"><span class="sv a">±15.85%</span><span class="sl">Acreage Error</span></div>
+          </div>
+          <ul class="xl">
+            <li><strong>Project:</strong> Automated Kharif Rice Mapping Using SAR Data & Machine Learning (GEE).</li>
+            <li>Developed a <strong>Random Forest model on Google Earth Engine</strong> for rice mapping using
+              Sentinel-1 SAR data — <strong>96.36%–98.59% accuracy</strong>, acreage within ±15.85% of reported values.
+            </li>
+            <li>Optimised large-scale <strong>remote sensing data processing pipelines</strong> on GEE for regional
+              agricultural datasets.</li>
+          </ul>
+          <a href="https://www.researchgate.net/publication/387849714_Automated_kharif_rice_mapping_using_SAR_data_and_machine_learning_techniques_in_GEE_platform"
+            target="_blank" class="pub-link">
+            📄 Published · Current Science Vol.126 · May 2024 · DOI: 10.18520/cs/v126/i10/1265-1272 ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="sec-hd reveal">
+        <span class="sec-badge">03 · Academic</span>
+        <h2 class="sec-title">Education</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="edu-grid">
+        <div class="glass edu-card reveal" style="transition-delay:.05s">
+          <div class="edu-deg">B.Tech – Agricultural Information Technology</div>
+          <div class="edu-school">AAU Anand · 2019–2023</div>
+          <div class="edu-score">8.03 <span
+              style="font-size:16px;color:var(--dim);font-family:var(--sf);font-weight:400;">/10 GPA</span></div>
+          <div class="edu-note">President, Nature's Club · House Leader</div>
+        </div>
+        <div class="glass edu-card reveal" style="transition-delay:.1s">
+          <div class="edu-deg">H.S.C. Science</div>
+          <div class="edu-school">C.K. Prajapati School, Vadodara · 2017–2019</div>
+          <div class="edu-score">65.4%</div>
+        </div>
+        <div class="glass edu-card reveal" style="transition-delay:.15s">
+          <div class="edu-deg">S.S.C. (GSEB)</div>
+          <div class="edu-school">Vidhya Vikas School, Vadodara · 2016–2017</div>
+          <div class="edu-score">82%</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LANGUAGES -->
+    <section style="margin-bottom:0;">
+      <div class="sec-hd reveal">
+        <span class="sec-badge">04 · Languages</span>
+        <h2 class="sec-title">Languages</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="lang-wrap reveal">
+        <span class="lang">English</span>
+        <span class="lang">Hindi</span>
+        <span class="lang">Gujarati</span>
+      </div>
+    </section>
 
   </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <span>© 2025 <span class="footer-glow">Saurabh Vyas</span></span>
+    <span class="footer-glow">Machine Learning Engineer</span>
+    <span>vyassaurabh88@gmail.com · +91 63549 39708</span>
+  </footer>
+
+  <!-- ══ SCRIPTS ══ -->
+  <script>
+    /* Agri — Drone Field Scanner */
+    (function(){
+      const canvas=document.getElementById('acanvas');
+      if(!canvas) return;
+      const ctx=canvas.getContext('2d');
+      let W,H;
+
+      function resize(){
+        W=canvas.parentElement.clientWidth;
+        H=canvas.parentElement.clientHeight;
+        canvas.width=W; canvas.height=H;
+      }
+      resize();
+      window.addEventListener('resize',resize);
+
+      /* ── FIELD PARCELS (bottom 55% of canvas) ── */
+      /* Normalized to field area [0..1] mapped to canvas field zone */
+      const parcels=[
+        {pts:[[0,0],[0.22,0],[0.2,0.18],[0.08,0.22]]},
+        {pts:[[0.22,0],[0.45,0],[0.42,0.14],[0.2,0.18]]},
+        {pts:[[0.45,0],[0.68,0],[0.65,0.12],[0.42,0.14]]},
+        {pts:[[0.68,0],[1,0],[1,0.2],[0.65,0.12]]},
+        {pts:[[0.08,0.22],[0.2,0.18],[0.24,0.42],[0.06,0.44]]},
+        {pts:[[0.2,0.18],[0.42,0.14],[0.44,0.38],[0.24,0.42]]},
+        {pts:[[0.42,0.14],[0.65,0.12],[0.66,0.36],[0.44,0.38]]},
+        {pts:[[0.65,0.12],[1,0.2],[1,0.42],[0.66,0.36]]},
+        {pts:[[0.06,0.44],[0.24,0.42],[0.22,0.65],[0.04,0.66]]},
+        {pts:[[0.24,0.42],[0.44,0.38],[0.46,0.62],[0.22,0.65]]},
+        {pts:[[0.44,0.38],[0.66,0.36],[0.68,0.6],[0.46,0.62]]},
+        {pts:[[0.66,0.36],[1,0.42],[1,0.65],[0.68,0.6]]},
+        {pts:[[0.04,0.66],[0.22,0.65],[0.2,0.86],[0.02,0.88]]},
+        {pts:[[0.22,0.65],[0.46,0.62],[0.44,0.84],[0.2,0.86]]},
+        {pts:[[0.46,0.62],[0.68,0.6],[0.66,0.82],[0.44,0.84]]},
+        {pts:[[0.68,0.6],[1,0.65],[1,0.88],[0.66,0.82]]},
+        {pts:[[0.02,0.88],[0.2,0.86],[0.18,1],[0,1]]},
+        {pts:[[0.2,0.86],[0.44,0.84],[0.42,1],[0.18,1]]},
+        {pts:[[0.44,0.84],[0.66,0.82],[0.64,1],[0.42,1]]},
+        {pts:[[0.66,0.82],[1,0.88],[1,1],[0.64,1]]},
+      ];
+
+      const stops=[
+        [0.0, [60,90,40]],
+        [0.3, [80,140,55]],
+        [0.6, [30,110,45]],
+        [0.85,[15,75,30]],
+        [1.0, [100,160,60]],
+      ];
+      function ndviRGB(v){
+        for(let i=0;i<stops.length-1;i++){
+          const [t0,c0]=stops[i],[t1,c1]=stops[i+1];
+          if(v>=t0&&v<=t1){
+            const f=(v-t0)/(t1-t0);
+            return c0.map((ch,j)=>Math.round(ch+(c1[j]-ch)*f));
+          }
+        }
+        return stops[stops.length-1][1];
+      }
+
+      parcels.forEach(p=>{
+        p.phase=Math.random();
+        p.speed=0.0006+Math.random()*0.0005;
+      });
+
+      /* ── DRONE ── */
+      const drone={x:0.5, y:0, vx:0.0008, vy:0};
+
+      /* Drone body draw */
+      function drawDrone(cx,cy,sc){
+        ctx.save();
+        ctx.translate(cx,cy);
+        // subtle hover bob
+        const bob=Math.sin(Date.now()*0.002)*sc*0.6;
+        ctx.translate(0,bob);
+
+        const arm=sc*18, motorR=sc*5, bodyR=sc*7;
+
+        // arms
+        ctx.strokeStyle='rgba(180,200,220,0.85)';
+        ctx.lineWidth=sc*2.5;
+        [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([dx,dy])=>{
+          ctx.beginPath();
+          ctx.moveTo(0,0);
+          ctx.lineTo(dx*arm,dy*arm);
+          ctx.stroke();
+          // motor
+          ctx.beginPath();
+          ctx.arc(dx*arm,dy*arm,motorR,0,Math.PI*2);
+          ctx.fillStyle='rgba(60,80,100,0.9)';
+          ctx.fill();
+          ctx.strokeStyle='rgba(100,180,200,0.5)';
+          ctx.lineWidth=sc;
+          ctx.stroke();
+        });
+
+        // propeller spin
+        const pAngle=Date.now()*0.015;
+        [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([dx,dy])=>{
+          ctx.save();
+          ctx.translate(dx*arm,dy*arm);
+          ctx.rotate(pAngle*(dx*dy>0?1:-1));
+          ctx.strokeStyle='rgba(200,220,240,0.55)';
+          ctx.lineWidth=sc*1.5;
+          for(let b=0;b<2;b++){
+            ctx.beginPath();
+            ctx.moveTo(-motorR*2.2,0);
+            ctx.lineTo(motorR*2.2,0);
+            ctx.stroke();
+            ctx.rotate(Math.PI/2);
+          }
+          ctx.restore();
+        });
+
+        // body
+        ctx.beginPath();
+        ctx.arc(0,0,bodyR,0,Math.PI*2);
+        ctx.fillStyle='rgba(40,55,75,0.95)';
+        ctx.fill();
+        ctx.strokeStyle='rgba(45,212,191,0.8)';
+        ctx.lineWidth=sc*1.5;
+        ctx.stroke();
+
+        // lens dot
+        ctx.beginPath();
+        ctx.arc(0,0,sc*2.5,0,Math.PI*2);
+        ctx.fillStyle='rgba(45,212,191,0.9)';
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      /* Scan pulse state */
+      let pulseT=0;
+
+      function draw(){
+        requestAnimationFrame(draw);
+        ctx.clearRect(0,0,W,H);
+
+        /* Sky gradient */
+        const sky=ctx.createLinearGradient(0,0,0,H*0.38);
+        sky.addColorStop(0,'#060e1a');
+        sky.addColorStop(1,'#0a1a10');
+        ctx.fillStyle=sky;
+        ctx.fillRect(0,0,W,H*0.38);
+
+        /* Horizon glow */
+        const hg=ctx.createLinearGradient(0,H*0.3,0,H*0.42);
+        hg.addColorStop(0,'rgba(30,80,50,0.0)');
+        hg.addColorStop(0.5,'rgba(45,212,140,0.12)');
+        hg.addColorStop(1,'rgba(30,80,50,0.0)');
+        ctx.fillStyle=hg;
+        ctx.fillRect(0,H*0.3,W,H*0.12);
+
+        /* Field zone */
+        const FY=H*0.38; // field top Y
+        const fieldH=H-FY;
+
+        /* Update parcels */
+        parcels.forEach(p=>{ p.phase=(p.phase+p.speed)%1; });
+
+        /* Draw field parcels */
+        parcels.forEach(p=>{
+          const [r,g,b]=ndviRGB(p.phase);
+          const scaled=p.pts.map(([x,y])=>[x*W, FY+y*fieldH]);
+          const cx=scaled.reduce((s,q)=>s+q[0],0)/scaled.length;
+          const cy=scaled.reduce((s,q)=>s+q[1],0)/scaled.length;
+          const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,fieldH*0.2);
+          grad.addColorStop(0,`rgb(${Math.min(255,r+14)},${Math.min(255,g+18)},${Math.min(255,b+8)})`);
+          grad.addColorStop(1,`rgb(${r},${g},${b})`);
+          ctx.beginPath();
+          ctx.moveTo(scaled[0][0],scaled[0][1]);
+          for(let i=1;i<scaled.length;i++) ctx.lineTo(scaled[i][0],scaled[i][1]);
+          ctx.closePath();
+          ctx.fillStyle=grad;
+          ctx.fill();
+        });
+
+        /* Road lines */
+        ctx.lineWidth=Math.max(1.2,W*0.0018);
+        ctx.strokeStyle='rgba(200,185,145,0.45)';
+        parcels.forEach(p=>{
+          const scaled=p.pts.map(([x,y])=>[x*W,FY+y*fieldH]);
+          ctx.beginPath();
+          ctx.moveTo(scaled[0][0],scaled[0][1]);
+          for(let i=1;i<scaled.length;i++) ctx.lineTo(scaled[i][0],scaled[i][1]);
+          ctx.closePath();
+          ctx.stroke();
+        });
+
+        /* ── DRONE position ── */
+        drone.x+=drone.vx;
+        if(drone.x<0.2||drone.x>0.8) drone.vx*=-1;
+        const droneX=drone.x*W;
+        const droneY=H*0.13;
+        const sc=W/1400; // scale factor
+
+        /* Scan beam footprint on field */
+        const beamW=W*0.38;
+        const beamH=fieldH*0.52;
+        const footCX=droneX;
+        const footCY=FY+fieldH*0.3;
+
+        pulseT+=0.04;
+        const pulse=0.55+0.18*Math.sin(pulseT);
+
+        /* Outer beam cone (lines from drone to field corners) */
+        const corners=[
+          [footCX-beamW/2, footCY-beamH/2],
+          [footCX+beamW/2, footCY-beamH/2],
+          [footCX+beamW/2, footCY+beamH/2],
+          [footCX-beamW/2, footCY+beamH/2],
+        ];
+        ctx.save();
+        corners.forEach(([cx,cy])=>{
+          ctx.beginPath();
+          ctx.moveTo(droneX,droneY+sc*7);
+          ctx.lineTo(cx,cy);
+          ctx.strokeStyle=`rgba(45,212,191,${pulse*0.22})`;
+          ctx.lineWidth=1;
+          ctx.stroke();
+        });
+
+        /* Beam fill (trapezoid from drone to field) */
+        ctx.beginPath();
+        ctx.moveTo(droneX,droneY+sc*7);
+        ctx.lineTo(corners[0][0],corners[0][1]);
+        ctx.lineTo(corners[3][0],corners[3][1]);
+        ctx.lineTo(corners[2][0],corners[2][1]);
+        ctx.lineTo(corners[1][0],corners[1][1]);
+        ctx.closePath();
+        const beamGrad=ctx.createLinearGradient(droneX,droneY,droneX,footCY+beamH/2);
+        beamGrad.addColorStop(0,`rgba(45,212,191,0)`);
+        beamGrad.addColorStop(0.4,`rgba(45,212,191,${pulse*0.10})`);
+        beamGrad.addColorStop(1,`rgba(45,212,191,${pulse*0.22})`);
+        ctx.fillStyle=beamGrad;
+        ctx.fill();
+        ctx.restore();
+
+        /* Holographic field overlay (teal tint on scanned parcels) */
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(footCX-beamW/2,footCY-beamH/2,beamW,beamH);
+        ctx.clip();
+        /* teal overlay on field */
+        ctx.fillStyle=`rgba(45,212,191,${pulse*0.13})`;
+        ctx.fillRect(footCX-beamW/2,footCY-beamH/2,beamW,beamH);
+        /* scan stripe moving downward */
+        const stripeY=footCY-beamH/2+((Date.now()*0.06)%(beamH));
+        const sg=ctx.createLinearGradient(0,stripeY-6,0,stripeY+6);
+        sg.addColorStop(0,'rgba(45,212,191,0)');
+        sg.addColorStop(0.5,`rgba(45,212,191,${pulse*0.55})`);
+        sg.addColorStop(1,'rgba(45,212,191,0)');
+        ctx.fillStyle=sg;
+        ctx.fillRect(footCX-beamW/2,stripeY-6,beamW,12);
+        /* field overlay border */
+        ctx.strokeStyle=`rgba(45,212,191,${pulse*0.7})`;
+        ctx.lineWidth=1.5;
+        ctx.strokeRect(footCX-beamW/2,footCY-beamH/2,beamW,beamH);
+        ctx.restore();
+
+        /* Vignette */
+        const vig=ctx.createRadialGradient(W/2,H/2,H*0.25,W/2,H/2,H*0.85);
+        vig.addColorStop(0,'rgba(0,0,0,0)');
+        vig.addColorStop(1,'rgba(0,0,0,0.5)');
+        ctx.fillStyle=vig;
+        ctx.fillRect(0,0,W,H);
+
+        /* Draw drone on top */
+        drawDrone(droneX,droneY,sc);
+      }
+
+      requestAnimationFrame(draw);
+    })();
+
+    /* ISRO — Rotating Earth + Satellite + SAR Beam */
+    (function(){
+      const canvas=document.getElementById('ecanvas');
+      if(!canvas) return;
+      const ctx=canvas.getContext('2d');
+      let W,H,cx,cy,R;
+
+      function resize(){
+        W=canvas.parentElement.clientWidth;
+        H=canvas.parentElement.clientHeight;
+        canvas.width=W; canvas.height=H;
+        cx=W*0.42; cy=H*0.5; R=Math.min(H*0.38,W*0.18);
+      }
+      resize();
+      window.addEventListener('resize',resize);
+
+      /* Lat/Lon → canvas XY on globe (simple orthographic) */
+      function project(lat,lon,rotY){
+        const phi=lat*Math.PI/180;
+        const lam=(lon-78)*Math.PI/180+rotY;
+        const x=Math.cos(phi)*Math.sin(lam);
+        const y=-Math.sin(phi);
+        const z=Math.cos(phi)*Math.cos(lam);
+        return {x:cx+R*x, y:cy+R*y, z};
+      }
+
+      /* Simplified country outlines as lat/lon polylines */
+      /* India outline — key points */
+      const india=[
+        [8.1,77.5],[8.4,76.9],[9.5,76.2],[10.8,75.7],
+        [11.8,74.8],[12.8,74.4],[13.8,74.1],[14.8,73.9],
+        [15.9,73.6],[16.8,73.2],[17.8,72.9],[18.9,72.5],
+        [19.8,71.8],[20.5,70.8],[21.1,69.8],[21.6,69.2],
+        [22.0,68.7],[22.4,68.4],[22.9,68.2],[23.4,68.0],
+        [23.9,67.8],[24.4,67.9],[24.7,68.6],[24.6,69.5],
+        [25.0,70.6],[25.6,71.2],[26.3,70.9],[27.2,70.4],
+        [28.1,70.5],[29.0,70.2],[29.8,70.8],[30.6,70.9],
+        [31.4,70.5],[32.2,71.0],[33.1,71.5],[33.9,72.3],
+        [34.5,73.0],[35.3,74.0],[36.1,74.7],[36.8,75.6],
+        [37.1,77.0],[36.4,77.6],[35.5,77.9],[34.6,78.3],
+        [33.9,78.7],[33.1,79.1],[32.4,79.6],[31.6,80.0],
+        [30.9,80.5],[30.1,81.0],[29.4,81.6],[28.6,82.2],
+        [28.0,83.0],[27.4,83.6],[26.9,84.2],[26.4,85.1],
+        [25.9,86.2],[25.4,87.1],[25.0,88.1],[24.5,88.8],
+        [24.1,89.3],[23.6,90.1],[23.1,91.2],[22.5,91.9],
+        [22.1,92.2],[21.6,92.6],[21.0,92.7],[20.4,92.2],
+        [19.8,85.8],[18.7,84.0],[17.4,82.4],[16.1,81.2],
+        [15.0,80.4],[13.9,80.1],[13.2,80.2],[12.4,80.1],
+        [11.6,79.7],[10.8,79.3],[10.0,78.7],[9.2,78.1],
+        [8.6,77.8],[8.1,77.5]
+      ];
+      /* Gujarat highlight — Ahmedabad area */
+      const gujarat=[
+        [24.5,68.5],[24.0,70.0],[23.5,71.5],[23.0,72.5],
+        [22.5,72.8],[22.0,73.0],[21.5,72.5],[21.0,72.0],
+        [20.5,72.5],[21.0,71.0],[22.0,69.5],[22.5,68.8],
+        [23.5,68.2],[24.5,68.5]
+      ];
+
+      /* Orbital path — inclined orbit like Sentinel-1 (~98° SSO) */
+      function orbitPoint(t){
+        // parametric inclined ellipse around globe
+        const inc=1.45; // ~83 deg inclination in radians
+        const lon=t*2*Math.PI;
+        const lat=Math.asin(Math.sin(inc)*Math.sin(lon))*180/Math.PI;
+        const lng=(Math.atan2(Math.cos(inc)*Math.sin(lon),Math.cos(lon)))*180/Math.PI;
+        return [lat,lng];
+      }
+
+      /* Ahmedabad approx position */
+      const AHM={lat:23.0,lon:72.6};
+
+      let rotY=0, satT=0, pulseR=0, beamAlpha=0;
+      let sarActive=false;
+
+      function draw(){
+        requestAnimationFrame(draw);
+        ctx.clearRect(0,0,W,H);
+
+        rotY+=0.002;
+        satT=(satT+0.0018)%1;
+
+        /* Deep space bg */
+        const bg=ctx.createRadialGradient(cx,cy,R*0.5,cx,cy,R*2.2);
+        bg.addColorStop(0,'#060c18');
+        bg.addColorStop(1,'#020408');
+        ctx.fillStyle=bg;
+        ctx.fillRect(0,0,W,H);
+
+        /* Ambient star dots */
+        ctx.fillStyle='rgba(255,255,255,0.55)';
+        [[0.08,0.12],[0.85,0.18],[0.15,0.75],[0.9,0.7],[0.5,0.08],
+        [0.72,0.88],[0.3,0.92],[0.95,0.45],[0.04,0.5],[0.6,0.05]].forEach(([sx,sy])=>{
+          ctx.beginPath();
+          ctx.arc(sx*W,sy*H,0.8,0,Math.PI*2);
+          ctx.fill();
+        });
+
+        /* Globe base */
+        const gGrad=ctx.createRadialGradient(cx-R*0.3,cy-R*0.3,R*0.05,cx,cy,R);
+        gGrad.addColorStop(0,'#0d2a3a');
+        gGrad.addColorStop(0.6,'#071828');
+        gGrad.addColorStop(1,'#030d18');
+        ctx.beginPath();
+        ctx.arc(cx,cy,R,0,Math.PI*2);
+        ctx.fillStyle=gGrad;
+        ctx.fill();
+
+        /* Globe atmosphere glow */
+        const atm=ctx.createRadialGradient(cx,cy,R*0.92,cx,cy,R*1.15);
+        atm.addColorStop(0,'rgba(45,212,191,0.12)');
+        atm.addColorStop(1,'rgba(45,212,191,0)');
+        ctx.beginPath();
+        ctx.arc(cx,cy,R*1.15,0,Math.PI*2);
+        ctx.fillStyle=atm;
+        ctx.fill();
+
+        /* Lat/lon grid lines */
+        ctx.save();
+        ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
+        ctx.strokeStyle='rgba(45,212,191,0.08)';
+        ctx.lineWidth=0.5;
+        for(let lat=-60;lat<=60;lat+=30){
+          ctx.beginPath();
+          let first=true;
+          for(let lon=-180;lon<=180;lon+=4){
+            const p=project(lat,lon,rotY);
+            if(p.z<0){first=true;continue;}
+            first?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);
+            first=false;
+          }
+          ctx.stroke();
+        }
+        for(let lon=0;lon<360;lon+=30){
+          ctx.beginPath();
+          let first=true;
+          for(let lat=-80;lat<=80;lat+=3){
+            const p=project(lat,lon,rotY);
+            if(p.z<0){first=true;continue;}
+            first?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);
+            first=false;
+          }
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        /* India outline */
+        ctx.save();
+        ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
+        ctx.beginPath();
+        let first=true;
+        india.forEach(([lat,lon])=>{
+          const p=project(lat,lon,rotY);
+          if(p.z<0){first=true;return;}
+          first?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);
+          first=false;
+        });
+        ctx.closePath();
+        ctx.fillStyle='rgba(34,197,94,0.18)';
+        ctx.fill();
+        ctx.strokeStyle='rgba(34,197,94,0.5)';
+        ctx.lineWidth=1.2;
+        ctx.stroke();
+
+        /* Gujarat highlight */
+        ctx.beginPath();
+        first=true;
+        gujarat.forEach(([lat,lon])=>{
+          const p=project(lat,lon,rotY);
+          if(p.z<0){first=true;return;}
+          first?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);
+          first=false;
+        });
+        ctx.closePath();
+        ctx.fillStyle='rgba(251,191,36,0.25)';
+        ctx.fill();
+        ctx.strokeStyle='rgba(251,191,36,0.7)';
+        ctx.lineWidth=1.0;
+        ctx.stroke();
+        ctx.restore();
+
+        /* Ahmedabad dot */
+        const ahmP=project(AHM.lat,AHM.lon,rotY);
+        if(ahmP.z>0){
+          ctx.beginPath();
+          ctx.arc(ahmP.x,ahmP.y,3,0,Math.PI*2);
+          ctx.fillStyle='rgba(251,191,36,0.9)';
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(ahmP.x,ahmP.y,6+Math.sin(Date.now()*0.004)*2,0,Math.PI*2);
+          ctx.strokeStyle='rgba(251,191,36,0.4)';
+          ctx.lineWidth=1;
+          ctx.stroke();
+        }
+
+        /* Globe border */
+        ctx.beginPath();
+        ctx.arc(cx,cy,R,0,Math.PI*2);
+        ctx.strokeStyle='rgba(45,212,191,0.2)';
+        ctx.lineWidth=1.5;
+        ctx.stroke();
+
+        /* Orbital path line */
+        ctx.save();
+        ctx.beginPath();
+        let op=orbitPoint(0);
+        let pp=project(op[0],op[1],rotY);
+        ctx.moveTo(pp.x,pp.y);
+        for(let i=1;i<=120;i++){
+          op=orbitPoint(i/120);
+          pp=project(op[0],op[1],rotY);
+          if(pp.z>0) ctx.lineTo(pp.x,pp.y);
+          else ctx.moveTo(pp.x,pp.y);
+        }
+        ctx.strokeStyle='rgba(45,212,191,0.25)';
+        ctx.lineWidth=1;
+        ctx.setLineDash([4,5]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
+
+        /* Satellite position */
+        const [sLat,sLon]=orbitPoint(satT);
+        const sP=project(sLat,sLon,rotY);
+
+        /* Check if satellite is over India (approx) */
+        const overIndia=sLat>8&&sLat<35&&
+          ((sLon+rotY*180/Math.PI+360)%360)>68&&
+          ((sLon+rotY*180/Math.PI+360)%360)<92;
+
+        if(sP.z>0){
+          /* SAR beam when over India */
+          if(overIndia){
+            beamAlpha=Math.min(1,beamAlpha+0.04);
+            sarActive=true;
+          } else {
+            beamAlpha=Math.max(0,beamAlpha-0.03);
+            sarActive=false;
+          }
+
+          if(beamAlpha>0&&ahmP.z>0){
+            /* Beam from satellite to ground */
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(sP.x,sP.y);
+            ctx.lineTo(ahmP.x-8,ahmP.y+4);
+            ctx.lineTo(ahmP.x+8,ahmP.y+4);
+            ctx.closePath();
+            const beamG=ctx.createLinearGradient(sP.x,sP.y,ahmP.x,ahmP.y);
+            beamG.addColorStop(0,`rgba(251,191,36,0)`);
+            beamG.addColorStop(0.5,`rgba(251,191,36,${beamAlpha*0.2})`);
+            beamG.addColorStop(1,`rgba(251,191,36,${beamAlpha*0.5})`);
+            ctx.fillStyle=beamG;
+            ctx.fill();
+            /* beam line */
+            ctx.beginPath();
+            ctx.moveTo(sP.x,sP.y);
+            ctx.lineTo(ahmP.x,ahmP.y);
+            ctx.strokeStyle=`rgba(251,191,36,${beamAlpha*0.6})`;
+            ctx.lineWidth=1;
+            ctx.stroke();
+            ctx.restore();
+          }
+
+          /* Satellite body */
+          ctx.save();
+          ctx.translate(sP.x,sP.y);
+          const ssc=R*0.045;
+          /* solar panels */
+          ctx.fillStyle='rgba(45,212,191,0.85)';
+          ctx.fillRect(-ssc*2.8,-ssc*0.4,ssc*2.2,ssc*0.8);
+          ctx.fillRect(ssc*0.6,-ssc*0.4,ssc*2.2,ssc*0.8);
+          /* body */
+          ctx.fillStyle=sarActive?'rgba(251,191,36,0.95)':'rgba(180,200,220,0.9)';
+          ctx.fillRect(-ssc*0.6,-ssc*0.6,ssc*1.2,ssc*1.2);
+          /* glow */
+          ctx.beginPath();
+          ctx.arc(0,0,ssc*1.5,0,Math.PI*2);
+          ctx.fillStyle=sarActive
+            ?`rgba(251,191,36,${0.15+beamAlpha*0.2})`
+            :'rgba(45,212,191,0.1)';
+          ctx.fill();
+          ctx.restore();
+
+          /* SAR pulse rings when active */
+          if(sarActive&&beamAlpha>0.3){
+            pulseR=(pulseR+1.2)%(R*0.25);
+            ctx.beginPath();
+            ctx.arc(sP.x,sP.y,pulseR,0,Math.PI*2);
+            ctx.strokeStyle=`rgba(251,191,36,${beamAlpha*(1-pulseR/(R*0.25))*0.6})`;
+            ctx.lineWidth=1;
+            ctx.stroke();
+          }
+        }
+
+        /* Info panel — right side */
+        const px=W*0.72, py=H*0.18;
+        ctx.font=`600 ${W*0.018}px 'Outfit',sans-serif`;
+        ctx.fillStyle='rgba(251,191,36,0.7)';
+        ctx.fillText('SENTINEL-1 SAR',px,py);
+        ctx.font=`${W*0.014}px 'Outfit',sans-serif`;
+        ctx.fillStyle='rgba(180,200,220,0.5)';
+        ctx.fillText(`LAT  ${sLat.toFixed(1)}°`,px,py+H*0.1);
+        ctx.fillText(`LON  ${sLon.toFixed(1)}°`,px,py+H*0.18);
+        ctx.fillText(`MODE  ${sarActive?'IW-SAR':'TRANSIT'}`,px,py+H*0.26);
+        ctx.fillStyle=sarActive?'rgba(251,191,36,0.8)':'rgba(45,212,191,0.5)';
+        ctx.fillText(`STATUS  ${sarActive?'SCANNING':'ORBIT'}`,px,py+H*0.34);
+
+        /* Vignette */
+        const vig=ctx.createRadialGradient(W/2,H/2,H*0.2,W/2,H/2,H*0.9);
+        vig.addColorStop(0,'rgba(0,0,0,0)');
+        vig.addColorStop(1,'rgba(0,0,0,0.55)');
+        ctx.fillStyle=vig;
+        ctx.fillRect(0,0,W,H);
+      }
+
+      requestAnimationFrame(draw);
+    })();
+
+    /* Stars */
+    (function () {
+      const sf = document.getElementById('starfield');
+      for (let i = 0; i < 220; i++) {
+        const s = document.createElement('span');
+        const sz = Math.random() * 2.2 + 0.4;
+        s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random() * 100}%;left:${Math.random() * 100}%;--d:${2.5 + Math.random() * 5}s;--dl:${Math.random() * 8}s;--oa:${.1 + Math.random() * .35};--ob:${.6 + Math.random() * .4}`;
+        sf.appendChild(s);
+      }
+    })();
+
+    /* 3D Heart */
+    (function () {
+      const canvas = document.getElementById('hcanvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+      const W = canvas.parentElement.clientWidth, H = canvas.parentElement.clientHeight;
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(W, H);
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(44, W / H, 0.1, 100);
+      camera.position.set(0, 0, 3.6);
+      const shape = new THREE.Shape();
+      shape.moveTo(0, .4);
+      shape.bezierCurveTo(0, .85, .5, .85, .5, .4);
+      shape.bezierCurveTo(.5, .1, 0, 0, 0, -.35);
+      shape.bezierCurveTo(0, 0, -.5, .1, -.5, .4);
+      shape.bezierCurveTo(-.5, .85, 0, .85, 0, .4);
+      const geo = new THREE.ExtrudeGeometry(shape, { depth: .22, bevelEnabled: true, bevelSegments: 8, steps: 2, bevelSize: .06, bevelThickness: .06 });
+      geo.center();
+      const heart = new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xdd1133, emissive: 0x550010, shininess: 90, transparent: true, opacity: .92 }));
+      const wire = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xff5577, wireframe: true, transparent: true, opacity: .1 }));
+      heart.rotation.z=wire.rotation.z=0;
+      scene.add(heart); scene.add(wire);
+      scene.add(new THREE.AmbientLight(0x220008, 1.2));
+      const pl1 = new THREE.PointLight(0xff2244, 2.5, 12); pl1.position.set(2, 2, 3); scene.add(pl1);
+      const pl2 = new THREE.PointLight(0x2dd4bf, 1.2, 10); pl2.position.set(-2, -1, 2); scene.add(pl2);
+      const N = 120, pos = new Float32Array(N * 3);
+      for (let i = 0; i < N; i++) { pos[i * 3] = (Math.random() - .5) * 7; pos[i * 3 + 1] = (Math.random() - .5) * 3.5; pos[i * 3 + 2] = (Math.random() - .5) * 3.5; }
+      const ptg = new THREE.BufferGeometry();
+      ptg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      scene.add(new THREE.Points(ptg, new THREE.PointsMaterial({ color: 0xff3355, size: .025, transparent: true, opacity: .5 })));
+      let t = 0;
+      (function loop() {
+        requestAnimationFrame(loop); t += .018;
+        const b = 1 + .07 * Math.abs(Math.sin(t * 2.6));
+        heart.scale.set(b, b, b); wire.scale.set(b, b, b);
+        heart.rotation.y = wire.rotation.y = t * .3;
+        pl1.intensity = 1.8 + 1.4 * Math.abs(Math.sin(t * 2.6));
+        renderer.render(scene, camera);
+      })();
+      window.addEventListener('resize', () => {
+        const w = canvas.parentElement.clientWidth, h = canvas.parentElement.clientHeight;
+        renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+      });
+    })();
+
+    /* Scroll reveal */
+    const io = new IntersectionObserver(e => {
+      e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+    }, { threshold: .07 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
+
 </html>
